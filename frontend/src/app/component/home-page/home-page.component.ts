@@ -17,7 +17,9 @@ newBook: Book = { title: '', author: '', year: new Date().getFullYear() };
   editingRowIndex: number | null = null; // Tracks the row being edited
 
   constructor(private readonly bookService: BookService, public authService: AuthService, private router: Router) {
-  if (this.authService.role.value === 'ADMIN') {
+    const role = localStorage.getItem('role') || this.authService.role.value;
+
+    if (role === 'ADMIN') {
     this.displayedColumns.push('actions');
   }
 }

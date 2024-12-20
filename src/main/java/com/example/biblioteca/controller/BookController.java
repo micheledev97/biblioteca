@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/books")
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:4200")
 public class BookController {
 
     @Autowired
@@ -34,12 +34,12 @@ public class BookController {
 
 
     @PostMapping
-    public Book addBook(@RequestBody Book book){
+    public Book addBook(@RequestBody Book book) {
         return bookRepository.save(book);
     }
 
     @PutMapping("edit/{id}")
-    public Book updateBook(@PathVariable Long id, @RequestBody Book bookDetails){
+    public Book updateBook(@PathVariable Long id, @RequestBody Book bookDetails) {
         Book book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found!!"));
         book.setTitle(bookDetails.getTitle());
         book.setAuthor(bookDetails.getAuthor());
